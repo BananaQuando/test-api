@@ -20,6 +20,14 @@ $(document).ready(function () {
                         list += `<li class="list-group-item"><a href="/${el.project_name}">${el.project_name}</a></li>`
                     });
                     $('#current-projects').html(list);
+                    $('#update_message_target').html(`
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                          Projects was successfully updated
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    `);
                 }
             },
             headers: {

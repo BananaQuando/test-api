@@ -34,9 +34,9 @@
                     </ul>
                 </div>
                 <form id="update_projects" action="{{ \Illuminate\Support\Facades\URL::to('/update') }}">
-                    <button type="submit" class="btn btn-primary mb-5">Update</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
-                <div id="update-message-target" class="mb-4 mt-4"></div>
+                <div id="update_message_target" class="mb-5 mt-3"></div>
             </div>
             <div class="col-sm-12">
                 <h2>How to start</h2>
