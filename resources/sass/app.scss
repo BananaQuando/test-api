@@ -7,4 +7,32 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+body{
+  font-size: 18px;
+}
 
+header{
+  h1{
+    margin: 40px 0;
+  }
+}
+
+pre.code{
+  display: block;
+  width: 100%;
+  background: #272822;
+  padding: 15px 50px 15px 15px;
+  color: #fff;
+  .key{
+    color: #FC961F;
+  }
+  .number{
+    color: #AA7BE9;
+  }
+  .string{
+    color: #e7c72e;
+  }
+  .comment{
+    color: #8b8b8b;
+  }
+}

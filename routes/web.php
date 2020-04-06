@@ -22,6 +22,6 @@ Route::group(
 
 		Route::resource('/', 'ApiController')->only(['index'])->names('api');
 
-
+		Route::patch('/update', 'ApiController@update');
 	}
 );

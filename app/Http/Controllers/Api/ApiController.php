@@ -3,10 +3,23 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Api\ApiProjectModel;
+use App\Repositories\Api\ApiProjectRepository;
+use App\Repositories\Api\ApiRepository;
 use Illuminate\Http\Request;
+use \Illuminate\Support\Facades\Config;
 
 class ApiController extends Controller
 {
+
+	private $apiRepository;
+	private $apiProjectRepository;
+
+	public function __construct() {
+
+		$this->apiRepository = app(ApiRepository::class);
+		$this->apiProjectRepository = app(ApiProjectRepository::class);
+	}
     /**
      * Display a listing of the resource.
      *
@@ -68,9 +81,44 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+		$this->apiRepository->clearAllApi();
+		$this->apiProjectRepository->clearAllProjects();
+
+		$projects = $this->getProjects();
+
+	    foreach ($projects as $project) {
+
+			$this->apiProjectRepository->createNewProject($project);
+
+	    	$this->getApiFromProject($project['project_folder']);
+		}
+		echo "<pre>" . print_r($projects, true) . "</pre>";
+    }
+
+    private function getApiFromProject($project_dir){
+
+
+    }
+
+    private function getProjects(){
+
+	    $root_folder = Config::get('app.TEST_API_FOLDER');
+	    $path_with_slashes = preg_replace('/([^A-Za-z0-9\s])/', '\\\\$1', $root_folder);
+
+	    $folders = array_filter(glob($root_folder.'*'), 'is_dir');
+	    $projects = [];
+
+	    foreach ($folders as $folder) {
+		    $projects[] = [
+		    	'project_name' => strtolower(preg_replace('/' . $path_with_slashes . '/', '', $folder)),
+			    'project_folder' => $folder
+		    ];
+		}
+
+		return $projects;
     }
 
     /**
