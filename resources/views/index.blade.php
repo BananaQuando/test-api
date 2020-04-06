@@ -27,15 +27,16 @@
             <div class="col-sm-12">
                 <h2>Prjects list</h2>
                 <div class="card mb-3">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                    <ul class="list-group list-group-flush" id="current-projects">
+                        @foreach($projects as $project)
+                            <li class="list-group-item"><a href="/{{ $project->project_name }}">{{ $project->project_name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <form id="update_projects" action="{{ \Illuminate\Support\Facades\URL::to('/update') }}">
                     <button type="submit" class="btn btn-primary mb-5">Update</button>
                 </form>
+                <div id="update-message-target" class="mb-4 mt-4"></div>
             </div>
             <div class="col-sm-12">
                 <h2>How to start</h2>
@@ -51,7 +52,7 @@
 
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
-                                <p>To start new placeholder <span class="badge badge-secondary">project</span>, create new folder with name <span class="badge badge-primary">your_project_name</span> in <span class="badge badge-primary">{{ \Illuminate\Support\Facades\Config::get('app.TEST_API_FOLDER') }}</span>
+                                <p>To start new placeholder <span class="badge badge-secondary">project</span>, create new folder with name <code>your_project_name</code> in <code>{{ \Illuminate\Support\Facades\Config::get('app.TEST_API_FOLDER') }}</code>
                                     <br>Then you need update API by clicking <span class="badge badge-primary">Update</span> button on home page </p>
                                 Your project will available on <a href="#">http:test-api.quando.pro/your_project_name</a>
                             </div>
@@ -67,7 +68,7 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div class="card-body">
-                                <p>To create new placeholder <span class="badge badge-secondary">API</span> add new JSON file with name <span class="badge badge-primary">your_API_name.json</span> in your project folder.</p>
+                                <p>To create new placeholder <span class="badge badge-secondary">API</span> add new JSON file with name <code>your_API_name.json</code> in your project folder.</p>
                                 Your project will available on <a href="#">http:test-api.quando.pro/your_project_name/your_API_name</a>
                             </div>
                         </div>
@@ -82,7 +83,7 @@
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                             <div class="card-body">
-                                Your JSON file must be an array of objects like this:
+                                Your <code>JSON</code> file must be an array of objects like this:
                                 <pre class="code">
 [
     {

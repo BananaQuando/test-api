@@ -28,7 +28,9 @@ class ApiController extends Controller
     public function index()
     {
 
-    	return view('index');
+    	$projects = $this->apiProjectRepository->getAllProjects();
+
+    	return view('index', compact('projects'));
     }
 
     /**

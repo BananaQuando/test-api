@@ -25,6 +25,13 @@ class ApiProjectRepository extends CoreRepository {
 		$this->startConditions()::whereNotNull('id')->delete();
 	}
 
+	public function getAllProjects(){
+
+		$result = $this->startConditions()::whereNotNull('id')->get();
+
+		return $result;
+	}
+
 	public function createNewProject($project){
 
 		$result = $this->startConditions()->create($project);
