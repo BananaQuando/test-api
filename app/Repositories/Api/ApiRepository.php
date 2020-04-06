@@ -38,4 +38,11 @@ class ApiRepository extends CoreRepository {
 
 		return $result;
 	}
+
+	public function getApiData($api_name){
+
+		$result = $this->startConditions()::select('data')->where(['api_name' => $api_name])->first();
+
+		return json_decode(json_decode(json_encode($result->data)));
+	}
 }

@@ -14,17 +14,15 @@ class ApiController extends Controller
 
 	private $apiRepository;
 	private $apiProjectRepository;
+	private $sortBy;
+	private $orderBy;
 
 	public function __construct() {
 
 		$this->apiRepository = app(ApiRepository::class);
 		$this->apiProjectRepository = app(ApiProjectRepository::class);
 	}
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 
@@ -33,12 +31,6 @@ class ApiController extends Controller
     	return view('index', compact('projects'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($project_name){
 
     	$api_list = $this->apiRepository->getAllProjectsApi($project_name);
@@ -46,14 +38,87 @@ class ApiController extends Controller
 	    return view('project', compact('api_list', 'project_name'));
     }
 
+    public function getApi($project_name, $api_name, $api_id = null){
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+		$api_data = $this->apiRepository->getApiData($api_name);
+
+	    $result_json = $this->filterApiResults($api_data, $_GET, $api_id);
+
+	    return $result_json;
+    }
+
+    private function filterApiResults($api_data, $filters, $api_id){
+
+		$result = [];
+
+	    if (gettype($api_data) == 'array'){
+
+		    foreach ($api_data as $api_item) {
+
+		    	$is_valid = $this->isValidApiResult($api_item, $filters, $api_id);
+
+		    	if ($api_id !== null && $is_valid){
+				    $result = $api_item;
+			    }else if($is_valid){
+				    $result[] = $api_item;
+			    }
+	    	}
+	    }else if(gettype($api_data) == 'object'){
+			if ($this->isValidApiResult($api_data, $filters, $api_id)){
+				$result = $api_data;
+			}
+	    }
+
+	    if (gettype($result) == 'array' && isset($filters['api_sort_by'])){
+	    	$result = $this->sortArray($result, $filters);
+	    }
+
+	    return json_encode($result);
+    }
+
+    private function sortArray($array, $filters){
+
+		$this->orderBy = 'ASC';
+	    $this->sortBy = $filters['api_sort_by'];
+
+		if (isset($filters['api_order_by']) && ($filters['api_order_by'] == 'ASC' || $filters['api_order_by'] == 'DESC')) $this->orderBy = $filters['api_order_by'];
+
+	    usort($array, array($this, "sortCompare"));
+
+	    return $array;
+    }
+
+    private function sortCompare($a, $b){
+
+		if (!isset($a->{$this->sortBy})) return -1;
+		if (!isset($b->{$this->sortBy})) return 1;
+
+		if ($this->orderBy === 'ASC'){
+			return strcmp($a->{$this->sortBy}, $b->{$this->sortBy});
+		} else {
+			return strcmp($b->{$this->sortBy}, $a->{$this->sortBy});
+		}
+
+    }
+
+    private function isValidApiResult($api_item, $filters, $api_id){
+
+		if ($filters){
+			foreach ($filters as $filter_key => $filter) {
+
+				if ($filter_key === 'api_sort_by' || $filter_key === 'api_order_by') continue;
+
+				if (!isset($api_item->{$filter_key}) || $api_item->{$filter_key} != $filter){
+					return false;
+				}
+			}
+		}
+
+		if ( ($api_id !== null && !isset($api_item->id)) || ($api_id !== null && $api_item->id != $api_id) ) return false;
+		return true;
+    }
+
+
     public function update(Request $request){
 
 		$this->apiRepository->clearAllApi();
