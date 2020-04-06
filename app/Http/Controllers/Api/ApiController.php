@@ -89,18 +89,40 @@ class ApiController extends Controller
 
 		$projects = $this->getProjects();
 
-	    foreach ($projects as $project) {
+	    foreach ($projects as $key => $project) {
 
-			$this->apiProjectRepository->createNewProject($project);
+		    $projects[$key] = $this->apiProjectRepository->createNewProject($project);
 
-	    	$this->getApiFromProject($project['project_folder']);
+	    	$api_list = $this->getApiFromProject($projects[$key]);
+
+		    foreach ($api_list as $api) {
+			    $this->apiRepository->createNewApi($api);
+	    	}
 		}
-		echo "<pre>" . print_r($projects, true) . "</pre>";
     }
 
-    private function getApiFromProject($project_dir){
+    private function getApiFromProject($project){
 
+    	$api_array = [];
 
+	    foreach (new \DirectoryIterator($project['project_folder']) as $fileInfo) {
+	    	$file_name = $fileInfo->getFilename();
+	    	$api_file = $project['project_folder'] . '/' . $file_name;
+	    	$api_name = preg_replace('/\.json/', '', $file_name);
+
+	    	if (!preg_match('/\.json/', $file_name)) continue;
+
+	    	$file_content = file_get_contents($api_file);
+
+		    $api_array[] = [
+				'project_id' => $project['project_id'],
+				'api_name' => $api_name,
+				'api_file' => $api_file,
+				'data' => $file_content,
+		    ];
+	    }
+
+	    return $api_array;
     }
 
     private function getProjects(){

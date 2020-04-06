@@ -16,7 +16,7 @@
     <header>
         <div class="container">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-sm-12">
                     <h1>Placeholder API for tests</h1>
                 </div>
             </div>
@@ -24,7 +24,7 @@
     </header>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-sm-12">
                 <h2>Prjects list</h2>
                 <div class="card mb-3">
                     <ul class="list-group list-group-flush">
@@ -37,7 +37,7 @@
                     <button type="submit" class="btn btn-primary mb-5">Update</button>
                 </form>
             </div>
-            <div class="col-xs-12">
+            <div class="col-sm-12">
                 <h2>How to start</h2>
                 <div class="accordion" id="accordionExample">
                     <div class="card">

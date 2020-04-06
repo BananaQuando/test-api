@@ -25,15 +25,10 @@ class ApiRepository extends CoreRepository {
 
 		$this->startConditions()::whereNotNull('id')->delete();
 	}
-//
-//	public function checkIssetAttributeById($attribute_id) {
-//
-//		$result = $this->startConditions()->find($attribute_id);
-//
-//		if ($result) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
+
+
+	public function createNewApi($api){
+
+		$this->startConditions()->create($api);
+	}
 }

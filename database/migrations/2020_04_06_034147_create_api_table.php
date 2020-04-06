@@ -16,7 +16,7 @@ class CreateApiTable extends Migration
         Schema::create('api', function (Blueprint $table) {
             $table->id();
 			$table->integer('project_id');
-			$table->string('api_name')->unique();
+			$table->string('api_name');
 			$table->string('api_file')->unique();
 			$table->text('data');
             $table->timestamps();

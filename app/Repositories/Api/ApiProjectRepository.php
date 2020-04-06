@@ -27,6 +27,16 @@ class ApiProjectRepository extends CoreRepository {
 
 	public function createNewProject($project){
 
-		$this->startConditions()->create($project);
+		$result = $this->startConditions()->create($project);
+
+		if ($result){
+			return [
+				'project_id' => $result->id,
+				'project_name' => $result->project_name,
+				'project_folder' => $result->project_folder
+			];
+		}else{
+			return null;
+		}
 	}
 }
