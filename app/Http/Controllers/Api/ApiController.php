@@ -81,8 +81,7 @@ class ApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
+    public function update(Request $request){
 
 		$this->apiRepository->clearAllApi();
 		$this->apiProjectRepository->clearAllProjects();
@@ -99,6 +98,8 @@ class ApiController extends Controller
 			    $this->apiRepository->createNewApi($api);
 	    	}
 		}
+
+		return json_decode(json_encode($projects));
     }
 
     private function getApiFromProject($project){
