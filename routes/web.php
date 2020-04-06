@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::group(
+	[
+		'namespace' => 'Api',
+		'prefix'    => ''
+	],
+	function () {
+
+		Route::resource('/', 'ApiController')->only(['index'])->names('api');
+
+
+	}
+);
