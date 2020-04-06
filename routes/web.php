@@ -20,7 +20,9 @@ Route::group(
 	],
 	function () {
 
-		Route::resource('/', 'ApiController')->only(['index'])->names('api');
+		Route::get('/', 'ApiController@index');
+
+		Route::get('/{project_name}', 'ApiController@show');
 
 		Route::patch('/update', 'ApiController@update');
 	}
