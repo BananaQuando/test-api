@@ -69,6 +69,7 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div class="card-body">
                                 <p>To create new placeholder <span class="badge badge-secondary">API</span> add new JSON file with name <code>your_API_name.json</code> in your project folder.</p>
+                                <br>Then you need update API by clicking <span class="badge badge-primary">Update</span> button on home page </p>
                                 Your project will available on <a href="#">http:test-api.quando.pro/your_project_name/your_API_name</a>
                             </div>
                         </div>
@@ -118,7 +119,75 @@
                         </div>
                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                             <div class="card-body">
-                                ...
+                                <p>After uploading your API will be available on <a href="#">http:test-api.quando.pro/your_project_name/your_API_name</a> it just simple <code>JSON</code></p>
+                                <p>You can fetch this data from your app</p>
+                                <p><code>URL</code> provides <code>id</code> parameter like this <a href="#">http:test-api.quando.pro/your_project_name/your_API_name/<code>{id}</code></a>. Then <code>API</code> returns only 1 object that contains this <code>id</code> property.</p>
+                                <pre class="code">
+{
+    <span class="key">"id"</span>: <span class="number">1</span>, <span class="comment">// id prop</span>
+    <span class="key">"name"</span>: <span class="string">"My json object 1"</span>
+}
+                                </pre>
+                                <p>Also you can add some <code>GET</code> params like this <a href="#">http:test-api.quando.pro/your_project_name/your_API_name<code>?something=1</code></a></p>
+                                <p>It returns only objects that contains same property with same value</p>
+                                <pre class="code">
+[
+    {
+        <span class="key">"id"</span>: <span class="number">1</span>,
+        <span class="key">"name"</span>: <span class="string">"My json object 1"</span>,
+        <span class="key">"something"</span>: <span class="number">1</span> <span class="comment">// ?something=1</span>
+    },
+    {
+        <span class="key">"id"</span>: <span class="number">2</span>,
+        <span class="key">"name"</span>: <span class="string">"My json object 2"</span>,
+        <span class="key">"something"</span>: <span class="number">1</span>
+    }
+]
+                                </pre>
+                                <p><code>GET</code> params can provide props <code>api_sort_by</code> and <code>api_order_by</code></p>
+                                <p><code>api_sort_by</code> accepts the prop name. Returned array will be sorted by value of this field</p>
+                                <p>Example <a href="#">http:test-api.quando.pro/your_project_name/your_API_name<code>?api_sort_by=something</code></a></p>
+                                <pre class="code">
+[
+    {
+        <span class="key">"id"</span>: <span class="number">1</span>,
+        <span class="key">"name"</span>: <span class="string">"My json object 1"</span>,
+        <span class="key">"something"</span>: <span class="number">1</span> <span class="comment">// sorted by this value</span>
+    },
+    {
+        <span class="key">"id"</span>: <span class="number">3</span>,
+        <span class="key">"name"</span>: <span class="string">"My json object 3"</span>,
+        <span class="key">"something"</span>: <span class="number">2</span>
+    },
+    {
+        <span class="key">"id"</span>: <span class="number">2</span>,
+        <span class="key">"name"</span>: <span class="string">"My json object 2"</span>,
+        <span class="key">"something"</span>: <span class="number">3</span>
+    }
+]
+                                </pre>
+                                <p><code>api_order_by</code> can provide only <code>ASC</code> and <code>DESC</code>. This value set the sorting order</p>
+                                <p>Example <a href="#">http:test-api.quando.pro/your_project_name/your_API_name<code>?api_sort_by=something&api_order_by=DESC</code></a></p>
+                                <pre class="code">
+[
+    {
+        <span class="key">"id"</span>: <span class="number">2</span>,
+        <span class="key">"name"</span>: <span class="string">"My json object 2"</span>,
+        <span class="key">"something"</span>: <span class="number">3</span> <span class="comment">// DESC order by this value</span>
+    },
+    {
+        <span class="key">"id"</span>: <span class="number">3</span>,
+        <span class="key">"name"</span>: <span class="string">"My json object 3"</span>,
+        <span class="key">"something"</span>: <span class="number">2</span>
+    },
+    {
+        <span class="key">"id"</span>: <span class="number">1</span>,
+        <span class="key">"name"</span>: <span class="string">"My json object 1"</span>,
+        <span class="key">"something"</span>: <span class="number">1</span>
+    }
+
+]
+                                </pre>
                             </div>
                         </div>
                     </div>
