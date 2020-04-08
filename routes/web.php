@@ -23,8 +23,11 @@ Route::group(
 		Route::get('/', 'ApiController@index');
 
 		Route::get('/{project_name}', 'ApiController@show');
+
 		Route::get('/{project_name}/{api_name}', 'ApiController@getApi');
+		Route::post('/{project_name}/{api_name}', 'ApiController@postApi');
 		Route::get('/{project_name}/{api_name}/{api_id}', 'ApiController@getApi');
+		Route::post('/{project_name}/{api_name}/{api_id}', 'ApiController@postApi');
 
 		Route::patch('/update', 'ApiController@update');
 	}

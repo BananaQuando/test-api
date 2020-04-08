@@ -42,10 +42,23 @@ class ApiController extends Controller
 
 		$api_data = $this->apiRepository->getApiData($api_name);
 
-	    $result_json = $this->filterApiResults($api_data, $_GET, $api_id);
+		$filters = $_GET;
+
+	    $result_json = $this->filterApiResults($api_data, $filters, $api_id);
 
 	    return $result_json;
     }
+
+	public function postApi($project_name, $api_name, $api_id = null, Request $request){
+
+		$api_data = $this->apiRepository->getApiData($api_name);
+
+		$filters = array_merge($_GET, $request->all());
+
+		$result_json = $this->filterApiResults($api_data, $request->all(), $api_id);
+
+		return response()->json($result_json, 200);
+	}
 
     private function filterApiResults($api_data, $filters, $api_id){
 
@@ -73,7 +86,7 @@ class ApiController extends Controller
 	    	$result = $this->sortArray($result, $filters);
 	    }
 
-	    return json_encode($result);
+	    return $result;
     }
 
     private function sortArray($array, $filters){
