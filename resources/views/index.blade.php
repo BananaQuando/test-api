@@ -129,6 +129,7 @@
 }
                                 </pre>
                                 <p>Also you can add some <code>GET</code> params like this <a href="#">http:test-api.quando.pro/your_project_name/your_API_name<code>?something=1</code></a></p>
+                                <p>Or some <code>POST</code> params in your request</p>
                                 <p>It returns only objects that contains same property with same value</p>
                                 <pre class="code">
 [
@@ -144,7 +145,7 @@
     }
 ]
                                 </pre>
-                                <p><code>GET</code> params can provide props <code>api_sort_by</code> and <code>api_order_by</code></p>
+                                <p><code>GET</code> or <code>POST</code> params can provide props <code>api_sort_by</code> and <code>api_order_by</code></p>
                                 <p><code>api_sort_by</code> accepts the prop name. Returned array will be sorted by value of this field</p>
                                 <p>Example <a href="#">http:test-api.quando.pro/your_project_name/your_API_name<code>?api_sort_by=something</code></a></p>
                                 <pre class="code">
@@ -188,6 +189,56 @@
 
 ]
                                 </pre>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingFive">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                                        Authentication
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <p><code>GET</code> or <code>POST</code> params can provide props <code>password</code> and <code>username</code> or <code>email</code></p>
+                                    <p>if you pass prop <code>password</code> you also need to pass <code>username</code> or <code>email</code> prop. It returns only 1 object without field <code>password</code> that contain same username or email and password hash in <code>md5</code></p>
+                                    <p><h3>Example:</h3></p>
+                                    <p><code>JSON</code> file</p>
+                                    <pre class="code">
+[
+    {
+        <span class="key">"id"</span>: <span class="number">1</span>,
+        <span class="key">"username"</span>: <span class="string">"test1"</span>,
+        <span class="key">"email"</span>: <span class="string">test1@gmail.com</span>
+        <span class="key">"password"</span>: <span class="string">fbb57a2d056c54e2d9ecf0054cf9f0da</span> <span class="comment">// MD5 hash of 654456</span>
+    },
+    {
+        <span class="key">"id"</span>: <span class="number">2</span>,
+        <span class="key">"username"</span>: <span class="string">"test2"</span>,
+        <span class="key">"email"</span>: <span class="string">test2@gmail.com</span>
+        <span class="key">"password"</span>: <span class="string">c8837b23ff8aaa8a2dde915473ce0991</span> <span class="comment">// MD5 hash of 123321</span>
+    },
+    {
+        <span class="key">"id"</span>: <span class="number">3</span>,
+        <span class="key">"username"</span>: <span class="string">"demo"</span>,
+        <span class="key">"email"</span>: <span class="string">demo@demo.com</span>
+        <span class="key">"password"</span>: <span class="string">fe01ce2a7fbac8fafaed7c982a04e229</span> <span class="comment">// MD5 hash of 'demo'</span>
+    }
+
+]
+                                    </pre>
+                                    <p>Request: <a href="#">http:test-api.quando.pro/your_project_name/your_API_name<code>?username=test1&password=654456</code></a></p>
+                                    <p>Return:</p>
+                                    <pre class="code">
+{
+        <span class="key">"id"</span>: <span class="number">1</span>,
+        <span class="key">"username"</span>: <span class="string">"test1"</span>,
+        <span class="key">"email"</span>: <span class="string">test1@gmail.com</span>
+}
+                                    </pre>
+                                </div>
                             </div>
                         </div>
                     </div>
