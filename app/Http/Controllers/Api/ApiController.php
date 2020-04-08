@@ -46,7 +46,7 @@ class ApiController extends Controller
 
 	    $result_json = $this->filterApiResults($api_data, $filters, $api_id);
 
-	    return $result_json;
+	    return json_encode($result_json);
     }
 
 	public function postApi($project_name, $api_name, $api_id = null, Request $request){
@@ -70,7 +70,11 @@ class ApiController extends Controller
 
 		    	$is_valid = $this->isValidApiResult($api_item, $filters, $api_id);
 
-		    	if ($api_id !== null && $is_valid){
+		    	if (isset($filters['password']) && $is_valid){
+
+		    		unset($api_item->password);
+		    		$result = $api_item;
+			    } else if ($api_id !== null && $is_valid){
 				    $result = $api_item;
 			    }else if($is_valid){
 				    $result[] = $api_item;
@@ -121,9 +125,14 @@ class ApiController extends Controller
 
 				if ($filter_key === 'api_sort_by' || $filter_key === 'api_order_by') continue;
 
-				if (!isset($api_item->{$filter_key}) || $api_item->{$filter_key} != $filter){
+				if (!isset($api_item->{$filter_key}) || (($filter_key !== 'password' && $api_item->{$filter_key} != $filter) || ($filter_key === 'password' && $api_item->{$filter_key} !== md5($filter)))){
 					return false;
 				}
+			}
+
+			if (isset($filters['password']) && !(isset($filters['email']) || isset($filters['username']))){
+
+				return false;
 			}
 		}
 
