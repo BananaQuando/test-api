@@ -203,7 +203,7 @@
                             <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
                                     <p><code>GET</code> or <code>POST</code> params can provide props <code>password</code> and <code>username</code> or <code>email</code></p>
-                                    <p>if you pass prop <code>password</code> you also need to pass <code>username</code> or <code>email</code> prop. It returns only 1 object without field <code>password</code> that contain same username or email and password hash in <code>md5</code></p>
+                                    <p>if you pass prop <code>password</code> you also need to pass <code>login</code> prop that contains <code>username</code> or <code>email</code> field value. It returns only 1 object without field <code>password</code> that contain same username or email and password hash in <code>md5</code></p>
                                     <p><h3>Example:</h3></p>
                                     <p><code>JSON</code> file</p>
                                     <pre class="code">
@@ -229,7 +229,7 @@
 
 ]
                                     </pre>
-                                    <p>Request: <a href="#">http:test-api.quando.pro/your_project_name/your_API_name<code>?username=test1&password=654456</code></a></p>
+                                    <p>Request: <a href="#">http:test-api.quando.pro/your_project_name/your_API_name<code>?login=test1&password=654456</code></a></p>
                                     <p>Return:</p>
                                     <pre class="code">
 {

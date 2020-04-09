@@ -125,13 +125,18 @@ class ApiController extends Controller
 
 				if ($filter_key === 'api_sort_by' || $filter_key === 'api_order_by') continue;
 
-				if (!isset($api_item->{$filter_key}) || (($filter_key !== 'password' && $api_item->{$filter_key} != $filter) || ($filter_key === 'password' && $api_item->{$filter_key} !== md5($filter)))){
+				if (
+					($filter_key === 'password' && $api_item->{$filter_key} !== md5($filter))
+					||
+					($filter_key === 'login' && ($api_item->email != $filter && $api_item->username != $filter))
+					||
+					($filter_key !== 'login' && $filter_key !== 'password' && ((!isset($api_item->{$filter_key})) || ($api_item->{$filter_key} !== $filter)))
+				){
 					return false;
 				}
 			}
 
-			if (isset($filters['password']) && !(isset($filters['email']) || isset($filters['username']))){
-
+			if (isset($filters['password']) && !(isset($filters['login']))){
 				return false;
 			}
 		}
