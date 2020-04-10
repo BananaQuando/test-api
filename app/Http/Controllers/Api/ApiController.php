@@ -70,11 +70,9 @@ class ApiController extends Controller
 
 		    	$is_valid = $this->isValidApiResult($api_item, $filters, $api_id);
 
-		    	if (isset($filters['password']) && $is_valid){
+		    	if (isset($api_item->password)) unset($api_item->password);
 
-		    		unset($api_item->password);
-		    		$result = $api_item;
-			    } else if ($api_id !== null && $is_valid){
+				if (($api_id !== null || isset($filters['password'])) && $is_valid){
 				    $result = $api_item;
 			    }else if($is_valid){
 				    $result[] = $api_item;

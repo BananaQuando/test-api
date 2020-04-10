@@ -43,6 +43,11 @@ class ApiRepository extends CoreRepository {
 
 		$result = $this->startConditions()::select('data')->where(['api_name' => $api_name])->first();
 
-		return json_decode(json_decode(json_encode($result->data)));
+		if ($result){
+
+			return json_decode(json_decode(json_encode($result->data)));
+		}else{
+			return null;
+		}
 	}
 }
