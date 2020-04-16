@@ -1,0 +1,96 @@
+[
+  {
+    "id": 9,
+    "type": "menu_container",
+    "title": "Content",
+    "link": null,
+    "icon": null,
+    "level": 1,
+    "children": [
+      {
+        "id": 10,
+        "type": "menu_link",
+        "title": "Ingredients",
+        "link": "/ingredients",
+        "level": 2,
+        "icon": "fa fa-leaf",
+        "children": null
+      },
+      {
+        "id": 11,
+        "type": "menu_link",
+        "title": "Dishes",
+        "link": "/dishes",
+        "level": 2,
+        "icon": "fa fa-birthday-cake",
+        "children": null
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "type": "menu_container",
+    "title": "Commercial",
+    "link": null,
+    "icon": null,
+    "level": 1,
+    "children": [
+      {
+        "id": 2,
+        "type": "menu_parent",
+        "title": "Sales",
+        "link": null,
+        "level": 2,
+        "icon": "fa fa-shopping-cart",
+        "children": [
+          {
+            "id": 3,
+            "type": "menu_link",
+            "title": "Top sales",
+            "link": "/sales/top-sales",
+            "level": 3,
+            "icon": null,
+            "children": null
+          },
+          {
+            "id": 4,
+            "type": "menu_link",
+            "title": "Most popular",
+            "link": "/sales/most-popular",
+            "level": 3,
+            "icon": null,
+            "children": null
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "type": "menu_parent",
+        "title": "Customers",
+        "link": null,
+        "level": 2,
+        "icon": "fa fa-user",
+        "children": [
+          {
+            "id": 7,
+            "type": "menu_link",
+            "title": "Customers",
+            "link": "/customers",
+            "level": 3,
+            "icon": null,
+            "children": null
+          },
+          {
+            "id": 8,
+            "type": "menu_link",
+            "title": "Customer group",
+            "link": "/customer-group",
+            "level": 3,
+            "icon": null,
+            "children": null
+          }
+        ]
+      }
+    ]
+  }
+]

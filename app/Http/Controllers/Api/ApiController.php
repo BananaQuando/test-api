@@ -128,13 +128,14 @@ class ApiController extends Controller
 					||
 					($filter_key === 'login' && ($api_item->email != $filter && $api_item->username != $filter))
 					||
-					($filter_key !== 'login' && $filter_key !== 'password' && ((!isset($api_item->{$filter_key})) || ($api_item->{$filter_key} !== $filter)))
+					($filter_key !== 'login' && $filter_key !== 'password' && ((!isset($api_item->{$filter_key})) || ($api_item->{$filter_key} != $filter)))
 				){
 					return false;
 				}
 			}
 
 			if (isset($filters['password']) && !(isset($filters['login']))){
+				echo "3<br>";
 				return false;
 			}
 		}

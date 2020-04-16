@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "name": "Hamburger",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores atque commodi dicta, distinctio, eius harum ipsa ipsam magni possimus provident ratione sit ut, velit. Cupiditate dicta excepturi harum natus nesciunt!",
+    "ingredients": [
+      {
+        "ingredient_id": 2,
+        "quantity": 1
+      },
+      {
+        "ingredient_id": 3,
+        "quantity": 1
+      },
+      {
+        "ingredient_id": 1,
+        "quantity": 0.03
+      },
+      {
+        "ingredient_id": 13,
+        "quantity": 0.01
+      },
+      {
+        "ingredient_id": 14,
+        "quantity": 0.007
+      },
+      {
+        "ingredient_id": 16,
+        "quantity": 0.03
+      },
+      {
+        "ingredient_id": 8,
+        "quantity": 0.02
+      }
+    ],
+    "nutrition": [
+      {
+        "name": "calories",
+        "value": 558,
+        "unit": "kcal"
+      },
+      {
+        "name": "carbohydrates",
+        "value": 23,
+        "unit": "g"
+      },
+      {
+        "name": "protein",
+        "value": 33,
+        "unit": "g"
+      },
+      {
+        "name": "protein",
+        "value": 35,
+        "unit": "g"
+      }
+    ]
+  }
+]

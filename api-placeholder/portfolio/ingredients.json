@@ -1,0 +1,250 @@
+[
+  {
+    "id": 1,
+    "name": "Tomato",
+    "quantity": 30,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://ichef.bbci.co.uk/wwfeatures/live/976_549/images/live/p0/4w/46/p04w46sp.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Hamburger buns",
+    "quantity": 100,
+    "unit": "unit",
+    "category_id": 4,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/10/Sesame_seed_hamburger_buns.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Pork cutlet",
+    "quantity": 24,
+    "unit": "unit",
+    "category_id": 3,
+    "image": "https://www.thespruceeats.com/thmb/q41foAs78uhdV_5Bao4BLyZDv_A=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1164840291_sm-b308d94ef9bb466094faeb0ffa2b2bd4.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Beef cutlet",
+    "quantity": 40,
+    "unit": "unit",
+    "category_id": 3,
+    "image": "https://i.ytimg.com/vi/TSevB4ecD30/maxresdefault.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Pork",
+    "quantity": 20,
+    "unit": "kg",
+    "category_id": 3,
+    "image": "https://www.thespruceeats.com/thmb/3N31JDnA1rj0ysC07BGfMmzBKB8=/2048x1365/filters:fill(auto,1)/garlic-and-herb-crusted-pork-loin-roast-3059504-7_preview-5b2bc4f88023b90037a968fa.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "Beef",
+    "quantity": 30,
+    "unit": "kg",
+    "category_id": 3,
+    "image": "https://cdn.britannica.com/68/143268-050-917048EA/Beef-loin.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Pizza dough",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 4,
+    "image": "https://www.washingtonpost.com/rf/image_982w/2010-2019/WashingtonPost/2019/04/23/Food/Images/v-pizza_018-2.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Tomato sauce",
+    "quantity": 100,
+    "unit": "L",
+    "category_id": 5,
+    "image": "https://www.yumsome.com/wp-content/uploads/2015/05/classic-italian-tomato-sauce-hero.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Mozzarella cheese",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 2,
+    "image": "https://previews.123rf.com/images/markstout/markstout1409/markstout140900201/32191047-shredded-mozzarella-cheese-on-a-cutting-board-with-a-grater.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Parmesan cheese",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 2,
+    "image": "https://i.insider.com/5c004e8ade34c40a2662ef52?width=1100&format=jpeg&auto=webp"
+  },
+  {
+    "id": 11,
+    "name": "Cheddar cheese",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 2,
+    "image": "https://cdn.shopify.com/s/files/1/0150/0232/products/Pearl_Valley_Sharp_Cheddar_Slices_large.jpg?v=1524073010"
+  },
+  {
+    "id": 12,
+    "name": "Maasdam cheese",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 2,
+    "image": "https://previews.123rf.com/images/andreyst/andreyst2003/andreyst200300172/141564615-maasdam-cheese-dairy-yellow-triangle-with-holes.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Onion",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://cdn.theatlantic.com/thumbor/TxEw_yjPER1uluJjP8qc0nNRHpw=/0x72:1000x635/720x405/media/img/mt/2015/05/shutterstock_247399801/original.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Garlic",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://static.toiimg.com/photo/70173931.cms"
+  },
+  {
+    "id": 14,
+    "name": "Salad",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://www.organicfacts.net/wp-content/uploads/lettuce-1.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Chinese cabbage",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://www.thespruceeats.com/thmb/VBv9UgWLLmdbZmZP6fNlLD4FOuM=/1932x1449/smart/filters:no_upscale()/GettyImages-592407296-587668263df78c17b633d6d0.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Cucumber",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://lh3.googleusercontent.com/proxy/DzuifvfF2Z6bYGV89eui6W-D1bO89BKQnoAXNOX9V8qx8nJIV3dBAgFtDh3W5rAnYquI6A2kud3Y2VXe3Q79Rw2CL0zi5r9ikzhxjlZr6lktDKpJ-oa_FBWBCOs"
+  },
+  {
+    "id": 17,
+    "name": "Gherkin",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://myfermentedfoods.com/wp-content/uploads/2020/02/Depositphotos_215931476_ds-scaled.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Olives",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://cdn-prod.medicalnewstoday.com/content/images/hero/325/325327/325327_1100.jpg"
+  },
+  {
+    "id": 18,
+    "name": "Champignon",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://calories-info.com/site/assets/files/95298/champignon.650x0.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Garlic Sause",
+    "quantity": 100,
+    "unit": "L",
+    "category_id": 5,
+    "image": "https://www.masala.tv/wp-content/uploads/2017/05/yogurt-garlic-sauce.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Barbecue sauce",
+    "quantity": 100,
+    "unit": "L",
+    "category_id": 5,
+    "image": "https://www.jessicagavin.com/wp-content/uploads/2014/06/sweet-and-spicy-homemade-barbecue-sauce-1200.jpg"
+  },
+  {
+    "id": 21,
+    "name": "Chili sauce",
+    "quantity": 100,
+    "unit": "L",
+    "category_id": 5,
+    "image": "https://www.chilipeppermadness.com/wp-content/uploads/2019/04/Sambal-Oelek-Recipe1.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Cherry sauce",
+    "quantity": 100,
+    "unit": "L",
+    "category_id": 5,
+    "image": "https://cookingjourneyblog.com/wp-content/uploads/2018/06/Cherry-Sauce-Fresh-Cherry-recipes-6.jpg"
+  },
+  {
+    "id": 23,
+    "name": "Chicken fillet",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 3,
+    "image": "https://leanmeat.london/lean-meat/uploads/2016/02/shutterstock_276270125.jpg"
+  },
+  {
+    "id": 24,
+    "name": "Chicken cutlet",
+    "quantity": 100,
+    "unit": "unit",
+    "category_id": 3,
+    "image": "https://images-gmi-pmc.edge-generalmills.com/8a30d56d-c3ce-47f4-994e-399fe9abbfba.jpg"
+  },
+  {
+    "id": 25,
+    "name": "Beans",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://www.myjewishlearning.com/wp-content/uploads/2011/01/vegetarian-baked-beans-main-new.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Toasts",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 4,
+    "image": "https://www.rachelcooks.com/wp-content/uploads/2018/01/Caesar-Croutons-web-4-of-6.jpg"
+  },
+  {
+    "id": 27,
+    "name": "Pepperoni",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 3,
+    "image": "https://cdn3.volusion.com/cmksf.kpnub/v/vspfiles/photos/3004S-2.jpg"
+  },
+  {
+    "id": 28,
+    "name": "Pork ham",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 3,
+    "image": "https://cdn11.bigcommerce.com/s-sek85hu/product_images/uploaded_images/picnic-ham.jpg"
+  },
+  {
+    "id": 29,
+    "name": "Potato",
+    "quantity": 100,
+    "unit": "kg",
+    "category_id": 1,
+    "image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/are-potatoes-healthy-1570222022.jpg"
+  }
+]

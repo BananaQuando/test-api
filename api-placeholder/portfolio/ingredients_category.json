@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Vegetables",
+    "thumbnail": "https://cdn.britannica.com/17/196817-050-6A15DAC3/vegetables.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Cheese",
+    "thumbnail": "https://www.whitegloveconsultancy.com/wp-content/uploads/cheeses.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Meat",
+    "thumbnail": "https://jooinn.com/images/meat-1.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Baking",
+    "thumbnail": "https://www.bakingbusiness.com/ext/resources/2019/9/09302019/TheBakeryCosBread_Lead.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Sauce",
+    "thumbnail": "https://chickenguy.com/wp-content/uploads/2018/07/story-boss-of-sauce.jpg"
+  }
+]
