@@ -136,6 +136,7 @@ return [
 
 
     'TEST_API_FOLDER' => "/var/www/test-api.quando.pro/public_html/api-placeholder/",
+    'SITE_URL' => "http://test-api.quando.pro/",
 
     'providers' => [
 

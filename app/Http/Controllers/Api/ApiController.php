@@ -17,6 +17,10 @@ class ApiController extends Controller
 	private $sortBy;
 	private $orderBy;
 
+	private $project_name;
+	private $thumb_width = 280;
+	private $thumb_height = 280;
+
 	public function __construct() {
 
 		$this->apiRepository = app(ApiRepository::class);
@@ -40,20 +44,30 @@ class ApiController extends Controller
 
     public function getApi($project_name, $api_name, $api_id = null){
 
+		if ($api_name === 'api_images') {
+			$image = Config::get('app.TEST_API_FOLDER') . "/$project_name/$api_name/$api_id";
+			return response()->file($image);
+		}
+
+	    $this->project_name = $project_name;
+
 		$api_data = $this->apiRepository->getApiData($api_name);
 
-		$filters = $_GET;
-
-	    $result_json = $this->filterApiResults($api_data, $filters, $api_id);
+	    $result_json = $this->filterApiResults($api_data, $_GET, $api_id);
 
 	    return json_encode($result_json);
     }
 
 	public function postApi($project_name, $api_name, $api_id = null, Request $request){
 
-		$api_data = $this->apiRepository->getApiData($api_name);
+		if ($api_name === 'api_images') {
+			$image = Config::get('app.TEST_API_FOLDER') . "/$project_name/$api_name/$api_id";
+			return response()->file($image);
+		}
 
-		$filters = array_merge($_GET, $request->all());
+		$this->project_name = $project_name;
+
+		$api_data = $this->apiRepository->getApiData($api_name);
 
 		$result_json = $this->filterApiResults($api_data, $request->all(), $api_id);
 
@@ -88,8 +102,124 @@ class ApiController extends Controller
 	    	$result = $this->sortArray($result, $filters);
 	    }
 
+	    $result = $this->saveImages($result);
+
 	    return $result;
     }
+
+    private function saveImages($items){
+
+		$result = [];
+
+	    if (gettype($items) == 'array'){
+		    foreach ($items as $item) {
+		    	$result[] = $this->getImage($item);
+		    }
+	    }else{
+		    $result = $this->getImage($items);
+	    }
+
+	    return $result;
+    }
+
+    private function getImage($item){
+
+	    if (isset($item->image) && $item->image){
+
+		    $item->thumbnail = $this->downloadImage($item->image, $this->thumb_width, $this->thumb_height);
+		    $item->image = $this->downloadImage($item->image);
+	    }
+
+	    return $item;
+    }
+
+    private function downloadImage($image, $r_width = null, $r_height = null){
+
+		$resize = (!$r_width && !$r_height) ? false : true;
+
+	    $images_folder = Config::get('app.TEST_API_FOLDER') . $this->project_name . '/api_images';
+
+	    if (!is_dir($images_folder)) mkdir($images_folder);
+
+		$filename = preg_replace('/^(\S+)\//', '', $image);
+		$filename = preg_replace('/\?\S+/', '', $filename);
+		$filename = md5($filename);
+
+	    if ($resize){
+		    $image_name = "$images_folder/$filename-$r_width" . "x" . "$r_height.jpg";
+		    $image_url = Config::get('app.SITE_URL') . "$this->project_name/api_images/$filename-$r_width" . "x" . "$r_height.jpg";
+	    }else{
+		    $image_name = "$images_folder/$filename.jpg";
+		    $image_url = Config::get('app.SITE_URL') . "$this->project_name/api_images/$filename.jpg";
+	    }
+
+	    if (file_exists($image_name)) return $image_url;
+
+		$img = $this->curlDownloadImage($image);
+
+		if ($this->is_base64_encoded($img)) $img = base64_decode($img);
+		$im = imagecreatefromstring($img);
+
+		$width = imagesx($im);
+	    $r_width = $r_width ? $r_width : $width;
+
+		$height = imagesy($im);
+		$r_height = $r_height ? $r_height : $height;
+
+	    if ($width > $height) {
+		    $y = 0;
+		    $x = ($width - $height) / 2;
+		    $smallestSide = $height;
+	    } else {
+		    $x = 0;
+		    $y = ($height - $width) / 2;
+		    $smallestSide = $width;
+	    }
+
+
+
+	    if ($resize) {
+		    $thumb = imagecreatetruecolor($r_width, $r_height);
+		    imagecopyresized($thumb, $im, 0, 0, $x, $y, $r_width, $r_height, $smallestSide, $smallestSide);
+		    imagejpeg($thumb, $image_name);
+		    imagedestroy($thumb);
+	    }else{
+		    $image = imagecreatetruecolor($width, $height);
+		    imagecopyresized($image, $im, 0, 0, 0, 0, $width, $height, $width, $height);
+		    imagejpeg($image, $image_name);
+		    imagedestroy($image);
+	    }
+
+
+	    imagedestroy($im);
+
+		return $image_url;
+    }
+
+    private function is_base64_encoded($data){
+	    if (preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $data)) {
+		    return TRUE;
+	    } else {
+		    return FALSE;
+	    }
+    }
+
+    private function curlDownloadImage($image){
+
+	    header("Content-Type: image/jpeg");
+
+	    $ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $image);
+	    curl_setopt($ch, CURLOPT_HEADER, false);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.1 Safari/537.11');
+	    $res = curl_exec($ch);
+	    $rescode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	    curl_close($ch) ;
+	    return $res;
+    }
+
 
     private function sortArray($array, $filters){
 
@@ -135,7 +265,6 @@ class ApiController extends Controller
 			}
 
 			if (isset($filters['password']) && !(isset($filters['login']))){
-				echo "3<br>";
 				return false;
 			}
 		}

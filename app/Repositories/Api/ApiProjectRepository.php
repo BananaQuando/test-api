@@ -32,6 +32,13 @@ class ApiProjectRepository extends CoreRepository {
 		return $result;
 	}
 
+//	public function getProjectFolder($project_id){
+//
+//		$result = $this->startConditions()::select('project_folder')->get($project_id);
+//
+//		return $result;
+//	}
+
 	public function createNewProject($project){
 
 		$result = $this->startConditions()->create($project);

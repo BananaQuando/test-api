@@ -109,10 +109,10 @@
     "quantity": 100,
     "unit": "kg",
     "category_id": 1,
-    "image": "https://static.toiimg.com/photo/70173931.cms"
+    "image": "https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/265/265853/bulbs-and-bowl-of-garlic.jpg"
   },
   {
-    "id": 14,
+    "id": 30,
     "name": "Salad",
     "quantity": 100,
     "unit": "kg",
@@ -133,7 +133,7 @@
     "quantity": 100,
     "unit": "kg",
     "category_id": 1,
-    "image": "https://lh3.googleusercontent.com/proxy/DzuifvfF2Z6bYGV89eui6W-D1bO89BKQnoAXNOX9V8qx8nJIV3dBAgFtDh3W5rAnYquI6A2kud3Y2VXe3Q79Rw2CL0zi5r9ikzhxjlZr6lktDKpJ-oa_FBWBCOs"
+    "image": "https://www.naturefresh.ca/wp-content/uploads/NFF-Cucumber-19-March-2018-2.jpg"
   },
   {
     "id": 17,
@@ -152,7 +152,7 @@
     "image": "https://cdn-prod.medicalnewstoday.com/content/images/hero/325/325327/325327_1100.jpg"
   },
   {
-    "id": 18,
+    "id": 31,
     "name": "Champignon",
     "quantity": 100,
     "unit": "kg",
