@@ -128,7 +128,7 @@ class ApiController extends Controller
 	    if (isset($item->image) && $item->image){
 
 		    $item->thumbnail = $this->downloadImage($item->image, $this->thumb_width, $this->thumb_height);
-		    $item->thumb_placeholder = $this->downloadImage($item->image, $this->thumb_width, $this->thumb_height, true);
+		    $item->thumbnail_placeholder = $this->downloadImage($item->image, $this->thumb_width, $this->thumb_height, true);
 		    $item->placeholder = $this->downloadImage($item->image, null, null, true);
 		    $item->image = $this->downloadImage($item->image);
 	    }
@@ -148,8 +148,8 @@ class ApiController extends Controller
 		$filename = preg_replace('/\?\S+/', '', $filename);
 		$filename = md5($filename);
 
+	    $filename .= $scale ? "_ph" : "";
 	    $filename .= $resize ? "_$r_width" . "x" . "$r_height" : "";
-	    $filename .= $scale ? "_ph_" : "";
 
 	    $image_name = "$images_folder/$filename.jpg";
 	    $image_url = Config::get('app.SITE_URL') . "$this->project_name/api_images/$filename.jpg";
