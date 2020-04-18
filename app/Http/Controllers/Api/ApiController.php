@@ -20,6 +20,7 @@ class ApiController extends Controller
 	private $project_name;
 	private $thumb_width = 280;
 	private $thumb_height = 280;
+	private $placeholder_height = 20;
 
 	public function __construct() {
 
@@ -127,13 +128,15 @@ class ApiController extends Controller
 	    if (isset($item->image) && $item->image){
 
 		    $item->thumbnail = $this->downloadImage($item->image, $this->thumb_width, $this->thumb_height);
+		    $item->thumb_placeholder = $this->downloadImage($item->image, $this->thumb_width, $this->thumb_height, true);
+		    $item->placeholder = $this->downloadImage($item->image, null, null, true);
 		    $item->image = $this->downloadImage($item->image);
 	    }
 
 	    return $item;
     }
 
-    private function downloadImage($image, $r_width = null, $r_height = null){
+    private function downloadImage($image, $r_width = null, $r_height = null, $scale = false){
 
 		$resize = (!$r_width && !$r_height) ? false : true;
 
@@ -145,13 +148,11 @@ class ApiController extends Controller
 		$filename = preg_replace('/\?\S+/', '', $filename);
 		$filename = md5($filename);
 
-	    if ($resize){
-		    $image_name = "$images_folder/$filename-$r_width" . "x" . "$r_height.jpg";
-		    $image_url = Config::get('app.SITE_URL') . "$this->project_name/api_images/$filename-$r_width" . "x" . "$r_height.jpg";
-	    }else{
-		    $image_name = "$images_folder/$filename.jpg";
-		    $image_url = Config::get('app.SITE_URL') . "$this->project_name/api_images/$filename.jpg";
-	    }
+	    $filename .= $resize ? "_$r_width" . "x" . "$r_height" : "";
+	    $filename .= $scale ? "_ph_" : "";
+
+	    $image_name = "$images_folder/$filename.jpg";
+	    $image_url = Config::get('app.SITE_URL') . "$this->project_name/api_images/$filename.jpg";
 
 	    if (file_exists($image_name)) return $image_url;
 
@@ -169,28 +170,36 @@ class ApiController extends Controller
 	    if ($width > $height) {
 		    $y = 0;
 		    $x = ($width - $height) / 2;
-		    $smallestSide = $height;
+		    $sm_height = $height;
+		    $sm_width = $height;
 	    } else {
 		    $x = 0;
 		    $y = ($height - $width) / 2;
-		    $smallestSide = $width;
+		    $sm_height = $width;
+		    $sm_width = $width;
 	    }
 
 
-
-	    if ($resize) {
-		    $thumb = imagecreatetruecolor($r_width, $r_height);
-		    imagecopyresized($thumb, $im, 0, 0, $x, $y, $r_width, $r_height, $smallestSide, $smallestSide);
-		    imagejpeg($thumb, $image_name);
-		    imagedestroy($thumb);
-	    }else{
-		    $image = imagecreatetruecolor($width, $height);
-		    imagecopyresized($image, $im, 0, 0, 0, 0, $width, $height, $width, $height);
-		    imagejpeg($image, $image_name);
-		    imagedestroy($image);
+	    if (!$resize){
+		    $r_width = $width;
+		    $r_height = $height;
+		    $sm_width = $width;
+		    $sm_height = $height;
+		    $x = 0;
+		    $y = 0;
+	    }
+	    if ($scale){
+		    $ratio = $r_width / $r_height;
+		    $r_width = $ratio * $this->placeholder_height;
+		    $r_height = $this->placeholder_height;
 	    }
 
 
+	    $thumb = imagecreatetruecolor($r_width, $r_height);
+	    imagecopyresized($thumb, $im, 0, 0, $x, $y, $r_width, $r_height, $sm_width, $sm_height);
+
+	    imagejpeg($thumb, $image_name);
+	    imagedestroy($thumb);
 	    imagedestroy($im);
 
 		return $image_url;
