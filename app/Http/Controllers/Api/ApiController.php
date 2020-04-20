@@ -119,7 +119,6 @@ class ApiController extends Controller
 	    }else{
 		    $result = $this->getImage($items);
 	    }
-
 	    return $result;
     }
 
@@ -129,7 +128,8 @@ class ApiController extends Controller
 
 		    $item->thumbnail = $this->downloadImage($item->image, $this->thumb_width, $this->thumb_height);
 		    $item->thumbnail_placeholder = $this->downloadImage($item->image, $this->thumb_width, $this->thumb_height, true);
-		    $item->placeholder = $this->downloadImage($item->image, null, null, true);
+		    $item->icon = $this->downloadImage($item->image, 60, 60);
+		    $item->image_placeholder = $this->downloadImage($item->image, null, null, true);
 		    $item->image = $this->downloadImage($item->image);
 	    }
 
@@ -283,26 +283,54 @@ class ApiController extends Controller
     }
 
 
-    public function update(Request $request){
+    public function updateApi($project_name, $api_name, $api_id, Request $request){
+
+	    $api_data = $this->apiRepository->getApiData($api_name);
+
+	    $api_request = $request->all();
+
+	    foreach ($api_data as $key => $api_item) {
+		    if ($api_item->id == $api_id){
+			    $api_data[$key] = $api_request;
+		    }
+	    }
+
+	    $this->apiRepository->updateApi($api_name, $api_data);
+
+		return $this->getApi($project_name, $api_name, $api_id);
+    }
+
+	public function update(Request $request){
 
 		$this->apiRepository->clearAllApi();
 		$this->apiProjectRepository->clearAllProjects();
 
 		$projects = $this->getProjects();
 
-	    foreach ($projects as $key => $project) {
+		foreach ($projects as $key => $project) {
 
-		    $projects[$key] = $this->apiProjectRepository->createNewProject($project);
+			$projects[$key] = $this->apiProjectRepository->createNewProject($project);
 
-	    	$api_list = $this->getApiFromProject($projects[$key]);
+			$api_list = $this->getApiFromProject($projects[$key]);
 
-		    foreach ($api_list as $api) {
-			    $this->apiRepository->createNewApi($api);
-	    	}
+			foreach ($api_list as $api) {
+				$this->apiRepository->createNewApi($api);
+			}
 		}
 
 		return json_decode(json_encode($projects));
-    }
+	}
+
+	public function uploadImage($project_name, $api_name, $api_id, Request $request){
+
+		$images_folder = Config::get('app.TEST_API_FOLDER') . $this->project_name . '/api_images';
+
+		if ($request->hasFile('image')){
+			return ['1'];
+		}
+
+		return ['2'];
+	}
 
     private function getApiFromProject($project){
 

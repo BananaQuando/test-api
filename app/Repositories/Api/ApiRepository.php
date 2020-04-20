@@ -32,6 +32,17 @@ class ApiRepository extends CoreRepository {
 		$this->startConditions()->create($api);
 	}
 
+	public function updateApi($api_name, $data){
+
+		$api = $this->startConditions()::where(['api_name' => $api_name])->first();;
+
+		$api->data = $data;
+
+		$api->save();
+
+		return $api;
+	}
+
 	public function getAllProjectsApi($project_name){
 
 		$result = $this->startConditions()::select('api_name')->leftJoin('api_projects', 'api.project_id', '=', 'api_projects.id')->where(['project_name' => $project_name])->get();

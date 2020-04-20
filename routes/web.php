@@ -29,6 +29,10 @@ Route::group(
 		Route::get('/{project_name}/{api_name}/{api_id}', 'ApiController@getApi');
 		Route::post('/{project_name}/{api_name}/{api_id}', 'ApiController@postApi');
 
+		Route::post('/{project_name}/{api_name}/{api_id}/upload_image', 'ApiController@uploadImage');
+
+		Route::patch('/{project_name}/{api_name}/{api_id}', 'ApiController@updateApi');
+
 		Route::patch('/update', 'ApiController@update');
 	}
 );
