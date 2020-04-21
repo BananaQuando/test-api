@@ -323,13 +323,18 @@ class ApiController extends Controller
 
 	public function uploadImage($project_name, $api_name, $api_id, Request $request){
 
-		$images_folder = Config::get('app.TEST_API_FOLDER') . $this->project_name . '/api_images';
+		$images_folder = Config::get('app.TEST_API_FOLDER') . $project_name . '/api_images';
 
 		if ($request->hasFile('image')){
-			return ['1'];
+			$filename = $request->file('image')->getClientOriginalName();
+			$request->file('image')->move($images_folder, $filename);
+
+			$image_url = Config::get('app.SITE_URL') . "$project_name/api_images/$filename";
+
+			return ['status' => 'success' ,'url' => $image_url];
 		}
 
-		return ['2'];
+		return ['status' => 'error' ,'error' => 'no image'];
 	}
 
     private function getApiFromProject($project){
